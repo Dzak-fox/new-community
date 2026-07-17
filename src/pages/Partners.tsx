@@ -1,8 +1,18 @@
-import { ArrowRight, Check } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Check, Send } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import CtaSection from '../components/CtaSection';
-import { partnerFeatures, TELEGRAM_URL } from '../data';
+import { partnerFeatures } from '../data';
 import { SectionHeading } from '../components/SectionHeading';
+
+const PARTNER_TELEGRAM_URL = 'https://t.me/Trade_Academy_Bot?start=partner';
+
+const partnershipTypes = [
+  'Telegram-канал / сообщество',
+  'Бренд / брокер',
+  'Образовательный проект',
+  'Другое',
+];
 
 const placements = [
   { tag: 'Course screen', desc: 'Sponsored lesson header', cta: 'Brand logo + tagline' },
@@ -17,6 +27,11 @@ const requestSteps = [
 ];
 
 export default function Partners() {
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
   return (
     <>
       <PageHeader
@@ -95,36 +110,94 @@ export default function Partners() {
 
             <div className="relative overflow-hidden rounded-3xl border border-gold-500/20 bg-gradient-to-b from-ink-850/90 to-ink-900/90 p-8 shadow-glow sm:p-10">
               <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold-500/10 blur-2xl" />
-              <h3 className="font-display text-xl font-bold text-white">Partner request</h3>
+              <h3 className="font-display text-xl font-bold text-white">Заявка на партнёрство</h3>
               <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                Tell us about your brand and we'll reach out with a tailored placement plan.
+                Расскажите о своём бренде, и мы предложим индивидуальный формат размещения.
               </p>
 
-              <div className="mt-6 space-y-3">
-                {['Channel / brand name', 'Telegram handle', 'Audience size', 'What you want to promote'].map(
-                  (f) => (
-                    <div
-                      key={f}
-                      className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-500"
+              {submitted ? (
+                <div className="mt-6 rounded-2xl border border-gold-500/30 bg-gold-500/5 p-6 text-center">
+                  <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-gold-500/15">
+                    <Check className="h-6 w-6 text-gold-300" />
+                  </div>
+                  <p className="text-sm font-medium text-zinc-100">
+                    Заявка подготовлена. Продолжите общение в Telegram.
+                  </p>
+                  <a
+                    href={PARTNER_TELEGRAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-gold mt-5 w-full"
+                  >
+                    Открыть Telegram
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              ) : (
+                <form
+                  className="mt-6 space-y-4"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setSubmitted(true);
+                  }}
+                >
+                  <div>
+                    <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                      Название / контакт <span className="text-gold-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Канал, бренд или @username"
+                      className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-gold-500/40 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                      Тип партнёрства <span className="text-gold-400">*</span>
+                    </label>
+                    <select
+                      value={type}
+                      onChange={(e) => setType(e.target.value)}
+                      className="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-100 focus:border-gold-500/40 focus:outline-none"
                     >
-                      {f}
-                    </div>
-                  )
-                )}
-              </div>
+                      <option value="" className="bg-ink-900">Выберите тип…</option>
+                      {partnershipTypes.map((t) => (
+                        <option key={t} value={t} className="bg-ink-900">
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-              <a
-                href={TELEGRAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold mt-6 w-full"
-              >
-                Submit partner request
-                <ArrowRight className="h-4 w-4" />
-              </a>
-              <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] text-zinc-600">
-                <Check className="h-3 w-3 text-gold-500" /> No tokens or payment required to enquire
-              </p>
+                  <div>
+                    <label className="mb-1.5 block text-xs font-medium text-zinc-400">
+                      Сообщение <span className="text-zinc-600">(необязательно)</span>
+                    </label>
+                    <textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      rows={3}
+                      placeholder="Кратко опишите проект, аудиторию и цели"
+                      className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-600 focus:border-gold-500/40 focus:outline-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={!name.trim() || !type}
+                    className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    Подготовить заявку
+                    <Send className="h-4 w-4" />
+                  </button>
+                  <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-zinc-600">
+                    <Check className="h-3 w-3 text-gold-500" /> Без токенов и оплаты для запроса
+                  </p>
+                </form>
+              )}
             </div>
           </div>
         </div>
@@ -138,3 +211,6 @@ export default function Partners() {
     </>
   );
 }
+
+
+export default Partners
