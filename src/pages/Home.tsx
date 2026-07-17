@@ -46,7 +46,7 @@ export default function Home() {
           <div className="mx-auto max-w-3xl text-center">
             <span className="eyebrow animate-pulseGlow">
               <Sparkles className="h-3.5 w-3.5" />
-              AI-Powered Trading Education
+              Обучение трейдингу с ИИ
             </span>
             <h1 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-white text-balance sm:text-6xl lg:text-7xl">
               Trade Academy
@@ -55,22 +55,22 @@ export default function Home() {
               AI-тренер по Price Action
             </p>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg text-balance">
-              Master Price Action through theory, interactive missions, real chart practice and an
-              AI mentor — all inside a Telegram Mini App. No installs. No noise. Just deliberate
-              practice that makes you a better trader.
+              Освойте Price Action через теорию, интерактивные миссии, практику на реальных графиках
+              и ИИ-тренера — всё внутри Telegram Mini App. Без установки. Без шума. Только осознанная
+              практика, которая делает вас лучшим трейдером.
             </p>
 
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <TelegramButton size="lg" label="Open in Telegram" />
+              <TelegramButton size="lg" label="Открыть в Telegram" />
               <Link to="/academy" className="btn-ghost">
-                Explore the Academy
+                Изучить академию
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
             <div className="mt-6 flex items-center justify-center gap-2 text-xs text-zinc-500">
               <ShieldCheck className="h-4 w-4 text-gold-500" />
-              Free to start — no card, no token required
+              Бесплатно для старта — без карты, без токена
             </div>
           </div>
         </div>
@@ -127,19 +127,19 @@ export default function Home() {
           <div className="relative mx-auto max-w-3xl overflow-hidden rounded-3xl border border-gold-500/20 bg-gradient-to-b from-ink-850/90 to-ink-900/90 p-10 text-center shadow-glow sm:p-14">
             <span className="eyebrow">
               <span className="h-1.5 w-1.5 rounded-full bg-gold-400 animate-pulseGlow" />
-              Start learning today
+              Начните учиться сегодня
             </span>
             <h2 className="mt-6 font-display text-3xl font-extrabold leading-tight text-white text-balance sm:text-4xl">
-              Your trading education starts in Telegram
+              Ваше обучение трейдингу начинается в Telegram
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-zinc-400 text-balance">
-              Open the Trade Academy bot, pick your first topic, and start practicing Price Action
-              with an AI mentor — free, in under a minute.
+              Откройте бота Trade Academy, выберите первую тему и начните практиковать Price Action
+              с ИИ-тренером — бесплатно, меньше чем за минуту.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <TelegramButton size="lg" label="Open in Telegram" />
+              <TelegramButton size="lg" label="Открыть в Telegram" />
               <a href={TELEGRAM_URL} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                Open Mini App
+                Открыть Mini App
               </a>
             </div>
           </div>

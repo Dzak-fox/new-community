@@ -364,8 +364,3 @@ export const demoDailyStats: DemoStat[] = [
   { label: 'Top weak topic', value: 'Liquidity sweeps', sub: '3 losses linked' },
   { label: 'Best asset', value: 'EUR/USD', sub: '71% win rate' },
 ];
-
-
-
-
-export { bottomTabs }
