@@ -366,6 +366,6 @@ export const demoDailyStats: DemoStat[] = [
 ];
 
 
-export { bottomTabs }
 
-export { TELEGRAM_URL }
+
+export { bottomTabs }
